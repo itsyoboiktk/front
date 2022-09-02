@@ -15,91 +15,56 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import Tooltip from "@mui/material/Tooltip";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+// import Grid from "@mui/material/Grid";
+// import Icon from "@mui/material/Icon";
+// import Tooltip from "@mui/material/Tooltip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+// import MDBox from "components/MDBox";
+// import MDTypography from "components/MDTypography";
+// import DataTable from "examples/Tables/DataTable";
+// import MDButton from "components/MDButton";
 
 // Images
-import masterCardLogo from "assets/images/logos/mastercard.png";
-import visaLogo from "assets/images/logos/visa.png";
+// import masterCardLogo from "assets/images/logos/mastercard.png";
+// import visaLogo from "assets/images/logos/visa.png";
 
 // Material Dashboard 2 React context
-import { useMaterialUIController } from "context";
+// import { useMaterialUIController } from "context";
 
 function InentoryStuff() {
-  const [controller] = useMaterialUIController();
-  const { darkMode } = controller;
+  // const [controller] = useMaterialUIController();
+  // const { darkMode } = controller;
 
   return (
     <Card id="delete-account">
-      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
-        <MDTypography variant="h6" fontWeight="medium">
-          Inventory i am here
-        </MDTypography>
-        <MDButton variant="gradient" color="dark">
-          <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-          &nbsp;add new card
-        </MDButton>
-      </MDBox>
-      <MDBox p={2}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <MDBox
-              borderRadius="lg"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              p={3}
-              sx={{
-                border: ({ borders: { borderWidth, borderColor } }) =>
-                  `${borderWidth[1]} solid ${borderColor}`,
-              }}
-            >
-              <MDBox component="img" src={masterCardLogo} alt="master card" width="10%" mr={2} />
-              <MDTypography variant="h6" fontWeight="medium">
-                ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;7852
-              </MDTypography>
-              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
-                <Tooltip title="Edit Card" placement="top">
-                  <Icon sx={{ cursor: "pointer" }} fontSize="small">
-                    edit
-                  </Icon>
-                </Tooltip>
-              </MDBox>
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <MDBox
-              borderRadius="lg"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              p={3}
-              sx={{
-                border: ({ borders: { borderWidth, borderColor } }) =>
-                  `${borderWidth[1]} solid ${borderColor}`,
-              }}
-            >
-              <MDBox component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
-              <MDTypography variant="h6" fontWeight="medium">
-                ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;5248
-              </MDTypography>
-              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
-                <Tooltip title="Edit Card" placement="top">
-                  <Icon sx={{ cursor: "pointer" }} fontSize="small">
-                    edit
-                  </Icon>
-                </Tooltip>
-              </MDBox>
-            </MDBox>
-          </Grid>
-        </Grid>
-      </MDBox>
+      <CardMedia
+        component="img"
+        height="140"
+        image="assets/images/team-2.jpg"
+        alt="product image"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Shoe
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Nike
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          4000
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">View</Button>
+        <Button size="small">Edit</Button>
+        <Button size="small">Delete</Button>
+      </CardActions>
     </Card>
   );
 }
