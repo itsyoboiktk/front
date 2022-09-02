@@ -30,6 +30,7 @@ function Invoice({ date, id, price, noGutter }) {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
+      backgroundColor="pink"
       py={1}
       pr={1}
       mb={noGutter ? 0 : 1}

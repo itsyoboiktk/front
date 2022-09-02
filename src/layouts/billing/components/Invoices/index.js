@@ -27,7 +27,7 @@ import Invoice from "layouts/billing/components/Invoice";
 function Invoices() {
   return (
     <Card sx={{ height: "100%" }}>
-      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+      <MDBox pt={2} px={2} justifyContent="space-between" alignItems="center">
         <MDTypography variant="h6" fontWeight="medium">
           Invoices
         </MDTypography>

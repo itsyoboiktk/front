@@ -39,12 +39,13 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
+// import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-
+import InventoryTest from "layouts/inventory";
+import AddNewProduct from "layouts/addNewProducts";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -67,20 +68,36 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Add New",
+    key: "addNewProducts",
+    icon: <Icon fontSize="small">add</Icon>,
+    route: "/addNewProducts",
+    component: <AddNewProduct />,
+  },
+  {
+    type: "collapse",
+    name: "Inventory",
+    key: "inventory",
+    icon: <Icon fontSize="small">inventory</Icon>,
+    route: "/inventory",
+    component: <InventoryTest />,
+  },
+  {
+    type: "collapse",
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
     component: <Billing />,
   },
-  {
+  /* {
     type: "collapse",
     name: "RTL",
     key: "rtl",
     icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
     route: "/rtl",
     component: <RTL />,
-  },
+  }, */
   {
     type: "collapse",
     name: "Notifications",

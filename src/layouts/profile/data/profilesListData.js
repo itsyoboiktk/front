@@ -45,7 +45,7 @@ export default [
   },
   {
     image: ivana,
-    name: "Ivanna",
+    name: "Azam",
     description: "About files I can..",
     action: {
       type: "internal",
