@@ -27,12 +27,12 @@ import Footer from "examples/Footer";
 // import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Billing page components
-import InventoryStuff from "layouts/inventory/components/index";
+import Product from "layouts/productView/components/index";
 // import Invoices from "layouts/billing/components/Invoices";
 // import BillingInformation from "layouts/billing/components/BillingInformation";
 // import Transactions from "layouts/billing/components/Transactions";
 
-function InventoryTest() {
+function ProductView() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
@@ -41,7 +41,7 @@ function InventoryTest() {
           <Grid container spacing={3}>
             <Grid item xs={8} lg={6}>
               <Grid item xs={12}>
-                <InventoryStuff />
+                <Product />
               </Grid>
             </Grid>
           </Grid>
@@ -52,4 +52,4 @@ function InventoryTest() {
   );
 }
 
-export default InventoryTest;
+export default ProductView;

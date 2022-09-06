@@ -46,6 +46,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import InventoryTest from "layouts/inventory";
 import AddNewProduct from "layouts/addNewProducts";
+import ProductView from "layouts/productView";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -73,6 +74,14 @@ const routes = [
     icon: <Icon fontSize="small">add</Icon>,
     route: "/addNewProducts",
     component: <AddNewProduct />,
+  },
+  {
+    type: "collapse",
+    name: "Product View",
+    key: "produtView",
+    icon: <Icon fontSize="small">add</Icon>,
+    route: "/productView",
+    component: <ProductView />,
   },
   {
     type: "collapse",
