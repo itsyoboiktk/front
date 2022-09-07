@@ -14,24 +14,28 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
+// import homeDecor2 from "assets/images/home-decor-2.jpg";
 import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 // import Grid from "@mui/material/Grid";
 // import Icon from "@mui/material/Icon";
 // import Tooltip from "@mui/material/Tooltip";
-
+import "./inventory.css";
 // Material Dashboard 2 React components
+import homeDecor2 from "assets/images/home-decor-2.jpg";
+import MDButton from "components/MDButton";
 import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 import Cdata from "./data";
-// import MDTypography from "components/MDTypography";
+
 // import DataTable from "examples/Tables/DataTable";
-// import MDButton from "components/MDButton";
 
 // Images
 // import masterCardLogo from "assets/images/logos/mastercard.png";
@@ -45,40 +49,51 @@ function InentoryStuff() {
   // const { darkMode } = controller;
   // const [product, setProduct] = React.useState();
   // Cdata.map(setProduct);
-  console.log(Cdata[0].name);
   const navigate = useNavigate();
 
   return (
-    <MDBox>
-      {Cdata.map((ele) => (
-        <div display="flex" key={ele}>
-          <Card sx={{ maxWidth: 345, margin: "10px", flex: "1 1 20%" }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/assets/images/bruce-mars.jpg"
-              alt="product image"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {ele.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {ele.brand}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {ele.price}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button onClick={() => navigate("/layouts/productView/index", {})}>View</Button>
-              <Button size="small">Edit</Button>
-              <Button size="small">Delete</Button>
-            </CardActions>
-          </Card>
-        </div>
-      ))}
-    </MDBox>
+    <div className="grid-container">
+      <Box display="flex" flex-wrap="wrap" justify-content="center">
+        {Cdata.map((ele) => (
+          <MDBox
+            display="flex"
+            flex-wrap="wrap"
+            borderRadius="lg"
+            shadow="md"
+            width="100%"
+            height="100%"
+          >
+            <Card sx={{ maxWidth: 345, margin: "10px", flex: "1 1 20%" }}>
+              <CardMedia component="img" height="140" image={homeDecor2} alt="product image" />
+              <CardContent>
+                <MDTypography gutterBottom variant="h5" component="div">
+                  {ele.name}
+                </MDTypography>
+                <Typography variant="body2" color="text.secondary">
+                  {ele.brand}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  PKR/- {ele.price}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <MDButton
+                  onClick={() =>
+                    navigate("/productView", {
+                      state: { products: ele },
+                    })
+                  }
+                >
+                  View
+                </MDButton>
+                <MDButton size="small">Edit</MDButton>
+                <MDButton size="small">Delete</MDButton>
+              </CardActions>
+            </Card>
+          </MDBox>
+        ))}
+      </Box>
+    </div>
   );
 }
 

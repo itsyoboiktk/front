@@ -1,0 +1,11 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-style: dotted;
+    border-width: 2px;
+    border-color: aqua;
+    width: 100%;
+
+}

@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import React from "react";
+import { useLocation } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Box from "@mui/material/Box";
@@ -40,6 +41,8 @@ import MDBox from "components/MDBox";
 // import MDTypography from "components/MDTypography";
 // import DataTable from "examples/Tables/DataTable";
 import MDButton from "components/MDButton";
+import homeDecor1 from "assets/images/home-decor-1.jpg";
+import MDTypography from "components/MDTypography";
 
 // Images
 // import masterCardLogo from "assets/images/logos/mastercard.png";
@@ -54,6 +57,10 @@ function Product() {
   const handleOpen = () => {
     setOpen(true);
   };
+  const { state } = useLocation();
+  // eslint-disable-next-line prefer-destructuring
+  const products = state.products;
+  console.log(products);
   const style = {
     position: "absolute",
     top: "50%",
@@ -67,40 +74,42 @@ function Product() {
   };
   return (
     <MDBox>
-      <div>
-        <div className="product_card">
-          <div className="slider">
-            <Button className="btn">
-              <ArrowBackIosNewIcon />
-            </Button>
-            <img
-              src=""
-              alt="product"
-              style={{
-                objectFit: "contain",
-                maxWidth: "400px",
-                maxHeight: "400px",
-                minHeight: "400px",
-                minWidth: "400px",
-              }}
-            />
-            <Button>
-              <ArrowForwardIosIcon />
-            </Button>
-          </div>
-        </div>
+      <MDBox>
+        <MDBox display="flex">
+          <Button>
+            <ArrowBackIosNewIcon />
+          </Button>
+          <img
+            src={homeDecor1}
+            alt="product"
+            style={{
+              objectFit: "contain",
+              maxWidth: "400px",
+              maxHeight: "400px",
+              minHeight: "400px",
+              minWidth: "400px",
+            }}
+          />
+          <Button>
+            <ArrowForwardIosIcon />
+          </Button>
+        </MDBox>
 
-        <div className="desc">
-          <h1 style={{ fontWeight: "1000", fontSize: 50 }}>Shoe 01</h1>
-          <p>Brand: nike</p>
-          <p>Available Quantity: 450</p>
-          <p>Category: sneaker</p>
-          <p>For: male</p>
-          <h4 style={{ fontWeight: "600" }}>Price: 400</h4>
+        <MDBox className="desc">
+          <Typography fontSize={50} fontWeight="bold" textTransform="capitalize">
+            {products.name}
+          </Typography>
+          <MDTypography textTransform="capitalize">Brand: {products.brand}</MDTypography>
+          <MDTypography textTransform="capitalize">Available Quantity:450 </MDTypography>
+          <MDTypography textTransform="capitalize">Category: Sneakers </MDTypography>
+          <MDTypography textTransform="capitalize">For: Male </MDTypography>
+          <Typography fontSize={20} fontWeight="bold" textTransform="capitalize">
+            Price: {products.price}/- PKR
+          </Typography>
           <Rating name="half-rating" defaultValue={4} size="large" />
           <p>1.5k</p>
 
-          <div
+          <MDBox
             style={{
               height: "2px",
               backgroundColor: "black ",
@@ -108,8 +117,8 @@ function Product() {
               marginBottom: "5%",
             }}
           />
-        </div>
-        <div
+        </MDBox>
+        <MDBox
           style={{
             display: "flex",
             flexDirection: "column",
@@ -130,8 +139,8 @@ function Product() {
           <MDButton variant="gradient" color="info" startIcon={<ReviewsIcon />}>
             View Reviews
           </MDButton>
-        </div>
-      </div>
+        </MDBox>
+      </MDBox>
       <Modal
         open={open}
         onClose={handleClose}
