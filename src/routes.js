@@ -46,7 +46,8 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import InventoryTest from "layouts/inventory";
 import AddNewProduct from "layouts/addNewProducts";
-import ProductView from "layouts/productView";
+// import ProductView from "layouts/productView";
+import UpdateProductPage from "layouts/updatePage";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -58,6 +59,14 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Update Page",
+    key: "updatePage",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/updatePage",
+    component: <UpdateProductPage />,
   },
   {
     type: "collapse",
@@ -75,14 +84,14 @@ const routes = [
     route: "/addNewProducts",
     component: <AddNewProduct />,
   },
-  {
-    type: "collapse",
-    name: "Product View",
-    key: "produtView",
-    icon: <Icon fontSize="small">add</Icon>,
-    route: "/productView",
-    component: <ProductView />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Product View",
+  //   key: "produtView",
+  //   icon: <Icon fontSize="small">add</Icon>,
+  //   route: "/productView",
+  //   component: <ProductView />,
+  // },
   {
     type: "collapse",
     name: "Inventory",

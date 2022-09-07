@@ -18,7 +18,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
@@ -53,24 +53,29 @@ import MDTypography from "components/MDTypography";
 
 function Product() {
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
   const handleOpen = () => {
     setOpen(true);
   };
+  const handleClose = () => setOpen(false);
   const { state } = useLocation();
   // eslint-disable-next-line prefer-destructuring
   const products = state.products;
-  console.log(products);
+
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "white",
     borderRadius: "10px",
     boxShadow: 25,
     p: 4,
+    bgColor: "white",
+  };
+  const styleButton = {
+    marginBottom: "10px",
+    padding: "10px",
+    marginRight: "10px",
   };
   return (
     <MDBox>
@@ -95,7 +100,7 @@ function Product() {
           </Button>
         </MDBox>
 
-        <MDBox className="desc">
+        <MDBox>
           <Typography fontSize={50} fontWeight="bold" textTransform="capitalize">
             {products.name}
           </Typography>
@@ -108,17 +113,9 @@ function Product() {
           </Typography>
           <Rating name="half-rating" defaultValue={4} size="large" />
           <p>1.5k</p>
-
-          <MDBox
-            style={{
-              height: "2px",
-              backgroundColor: "black ",
-              marginTop: "5%",
-              marginBottom: "5%",
-            }}
-          />
         </MDBox>
         <MDBox
+          bgColor="error"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -126,6 +123,7 @@ function Product() {
           }}
         >
           <MDButton
+            sx={styleButton}
             variant="gradient"
             color="info"
             onClick={() => handleOpen()}
@@ -133,10 +131,10 @@ function Product() {
           >
             Delete
           </MDButton>
-          <MDButton variant="gradient" color="info" startIcon={<UpgradeIcon />}>
+          <MDButton sx={styleButton} variant="gradient" color="info" startIcon={<UpgradeIcon />}>
             Update
           </MDButton>
-          <MDButton variant="gradient" color="info" startIcon={<ReviewsIcon />}>
+          <MDButton sx={styleButton} variant="gradient" color="info" startIcon={<ReviewsIcon />}>
             View Reviews
           </MDButton>
         </MDBox>
@@ -147,15 +145,17 @@ function Product() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <MDBox bgColor="light" coloredShadow="dark" sx={style}>
+          <Typography variant="h6" component="h2">
             Are you sure you want to delete this item?
           </Typography>
-          <div style={{ flexDirection: "row" }}>
-            <Button>Yes</Button>
-            <Button>No</Button>
-          </div>
-        </Box>
+          <MDButton sx={styleButton} color="info">
+            Yes
+          </MDButton>
+          <MDButton sx={styleButton} color="info">
+            No
+          </MDButton>
+        </MDBox>
       </Modal>
     </MDBox>
   );

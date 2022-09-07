@@ -20,7 +20,9 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Modal from "@mui/material/Modal";
+// import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
@@ -44,57 +46,95 @@ import Cdata from "./data";
 // Material Dashboard 2 React context
 // import { useMaterialUIController } from "context";
 
-function InentoryStuff() {
+function InventoryStuff() {
   // const [controller] = useMaterialUIController();
   // const { darkMode } = controller;
   // const [product, setProduct] = React.useState();
   // Cdata.map(setProduct);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    borderRadius: "10px",
+    boxShadow: 25,
+    p: 4,
+  };
 
   return (
     <div className="grid-container">
-      <Box display="flex" flex-wrap="wrap" justify-content="center">
-        {Cdata.map((ele) => (
-          <MDBox
-            display="flex"
-            flex-wrap="wrap"
-            borderRadius="lg"
-            shadow="md"
-            width="100%"
-            height="100%"
+      {Cdata.map((ele) => (
+        <MDBox
+          display="flex"
+          flex-wrap="wrap"
+          borderRadius="lg"
+          shadow="md"
+          width="80%"
+          height="100%"
+          marginRight={10}
+          paddingBottom={1}
+          bgColor="error"
+        >
+          <Card sx={{ maxWidth: 345, margin: "10px", flex: "1 1 20%" }}>
+            <CardMedia component="img" height="140" image={homeDecor2} alt="product image" />
+            <CardContent>
+              <MDTypography gutterBottom variant="h5" component="div">
+                {ele.name}
+              </MDTypography>
+              <Typography variant="body2" color="text.secondary">
+                {ele.brand}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                PKR/- {ele.price}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <MDButton
+                color="info"
+                onClick={() =>
+                  navigate("/productView", {
+                    state: { products: ele },
+                  })
+                }
+              >
+                View
+              </MDButton>
+              <MDButton color="info">Edit</MDButton>
+              <MDButton
+                variant="gradient"
+                color="info"
+                onClick={() => handleOpen()}
+                startIcon={<DeleteIcon />}
+              >
+                Delete
+              </MDButton>
+            </CardActions>
+          </Card>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
           >
-            <Card sx={{ maxWidth: 345, margin: "10px", flex: "1 1 20%" }}>
-              <CardMedia component="img" height="140" image={homeDecor2} alt="product image" />
-              <CardContent>
-                <MDTypography gutterBottom variant="h5" component="div">
-                  {ele.name}
-                </MDTypography>
-                <Typography variant="body2" color="text.secondary">
-                  {ele.brand}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  PKR/- {ele.price}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <MDButton
-                  onClick={() =>
-                    navigate("/productView", {
-                      state: { products: ele },
-                    })
-                  }
-                >
-                  View
-                </MDButton>
-                <MDButton size="small">Edit</MDButton>
-                <MDButton size="small">Delete</MDButton>
-              </CardActions>
-            </Card>
-          </MDBox>
-        ))}
-      </Box>
+            <MDBox bgColor="light" sx={style}>
+              <Typography variant="h6" component="h2">
+                Are you sure you want to delete this item?
+              </Typography>
+              <MDButton color="info">Yes</MDButton>
+              <MDButton color="info">No</MDButton>
+            </MDBox>
+          </Modal>
+        </MDBox>
+      ))}
     </div>
   );
 }
 
-export default InentoryStuff;
+export default InventoryStuff;
