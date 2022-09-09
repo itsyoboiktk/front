@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 // import Box from "@mui/material/Box";
@@ -56,6 +56,7 @@ function Product() {
   const handleOpen = () => {
     setOpen(true);
   };
+  const navigate = useNavigate();
   const handleClose = () => setOpen(false);
   const { state } = useLocation();
   // eslint-disable-next-line prefer-destructuring
@@ -105,9 +106,11 @@ function Product() {
             {products.name}
           </Typography>
           <MDTypography textTransform="capitalize">Brand: {products.brand}</MDTypography>
-          <MDTypography textTransform="capitalize">Available Quantity:450 </MDTypography>
-          <MDTypography textTransform="capitalize">Category: Sneakers </MDTypography>
-          <MDTypography textTransform="capitalize">For: Male </MDTypography>
+          <MDTypography textTransform="capitalize">
+            Available Quantity: {products.quantity}{" "}
+          </MDTypography>
+          <MDTypography textTransform="capitalize">Category: {products.category} </MDTypography>
+          <MDTypography textTransform="capitalize">For: {products.gender} </MDTypography>
           <Typography fontSize={20} fontWeight="bold" textTransform="capitalize">
             Price: {products.price}/- PKR
           </Typography>
@@ -131,7 +134,13 @@ function Product() {
           >
             Delete
           </MDButton>
-          <MDButton sx={styleButton} variant="gradient" color="info" startIcon={<UpgradeIcon />}>
+          <MDButton
+            sx={styleButton}
+            onClick={() => navigate("/updatePage")}
+            variant="gradient"
+            color="info"
+            startIcon={<UpgradeIcon />}
+          >
             Update
           </MDButton>
           <MDButton sx={styleButton} variant="gradient" color="info" startIcon={<ReviewsIcon />}>

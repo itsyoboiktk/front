@@ -106,7 +106,16 @@ function InventoryStuff() {
               >
                 View
               </MDButton>
-              <MDButton color="info">Edit</MDButton>
+              <MDButton
+                color="info"
+                onClick={() =>
+                  navigate("/updatePage", {
+                    state: { products: ele },
+                  })
+                }
+              >
+                Edit
+              </MDButton>
               <MDButton
                 variant="gradient"
                 color="info"

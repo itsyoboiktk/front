@@ -28,7 +28,6 @@ import Footer from "examples/Footer";
 
 // Billing page components
 import UpdateProduct from "layouts/updatePage/components/index";
-import Bill from "layouts/billing/components/Bill";
 // import Invoices from "layouts/billing/components/Invoices";
 // import BillingInformation from "layouts/billing/components/BillingInformation";
 // import Transactions from "layouts/billing/components/Transactions";
@@ -43,7 +42,6 @@ function UpdateProductPage() {
             <Grid item xs={8} lg={6}>
               <Grid item xs={12}>
                 <UpdateProduct />
-                <Bill />
               </Grid>
             </Grid>
           </Grid>
