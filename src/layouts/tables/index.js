@@ -16,6 +16,9 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import * as React from "react";
+// import Modal from "@mui/material/Modal";
+// import Box from "@mui/material/Box";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -25,13 +28,22 @@ import MDTypography from "components/MDTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+// import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
+import OrderTable from "layouts/tables/data/orders";
+// import authorsTableData from "layouts/tables/data/authorsTableData";
 
 function Tables() {
-  const { columns, rows } = authorsTableData();
+  // const { columns, rows } = authorsTableData();
+  // const [open, setOpen] = React.useState(false);
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <DashboardLayout>
@@ -52,15 +64,15 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Inventory Management
+                  Orders Management
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
+                <OrderTable
+                  // table={{ columns, rows }}
                   // isSorted={false}
                   entriesPerPage={false}
-                  showTotalEntries={false}
+                  showTotalEntries
                   noEndBorder
                 />
               </MDBox>

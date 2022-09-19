@@ -35,8 +35,7 @@ import homeDecor2 from "assets/images/home-decor-2.jpg";
 import MDButton from "components/MDButton";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import Cdata from "./data";
-
+import axios from "axios";
 // import DataTable from "examples/Tables/DataTable";
 
 // Images
@@ -52,6 +51,19 @@ function InventoryStuff() {
   // const [product, setProduct] = React.useState();
   // Cdata.map(setProduct);
   const [open, setOpen] = React.useState(false);
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:4000/product/display")
+      .then((res) => {
+        setProducts(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [open]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -70,7 +82,7 @@ function InventoryStuff() {
 
   return (
     <div className="grid-container">
-      {Cdata.map((ele) => (
+      {products.map((ele) => (
         <MDBox
           display="flex"
           flex-wrap="wrap"
@@ -86,7 +98,7 @@ function InventoryStuff() {
             <CardMedia component="img" height="140" image={homeDecor2} alt="product image" />
             <CardContent>
               <MDTypography gutterBottom variant="h5" component="div">
-                {ele.name}
+                {ele.title}
               </MDTypography>
               <Typography variant="body2" color="text.secondary">
                 {ele.brand}

@@ -62,15 +62,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Update Page",
-    key: "updatePage",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/updatePage",
-    component: <UpdateProductPage />,
-  },
-  {
-    type: "collapse",
-    name: "Tables",
+    name: "Orders",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
@@ -83,14 +75,6 @@ const routes = [
     icon: <Icon fontSize="small">add</Icon>,
     route: "/addNewProducts",
     component: <AddNewProduct />,
-  },
-  {
-    type: "collapse",
-    name: "Product View",
-    key: "produtView",
-    icon: <Icon fontSize="small">add</Icon>,
-    route: "/productView",
-    component: <ProductView />,
   },
   {
     type: "collapse",
@@ -147,6 +131,22 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    // name: "Update Page",
+    key: "updatePage",
+    // icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/updatePage",
+    component: <UpdateProductPage />,
+  },
+  {
+    type: "collapse",
+    // name: "Product View",
+    key: "produtView",
+    // icon: <Icon fontSize="small">add</Icon>,
+    route: "/productView",
+    component: <ProductView />,
   },
 ];
 

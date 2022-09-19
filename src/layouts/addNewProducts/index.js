@@ -28,6 +28,7 @@ import Footer from "examples/Footer";
 
 // Billing page components
 import NewProductCard from "layouts/addNewProducts/components";
+// import OrderTable from "layouts/tables/data/orders";
 // import Invoices from "layouts/billing/components/Invoices";
 // import BillingInformation from "layouts/billing/components/BillingInformation";
 // import Transactions from "layouts/billing/components/Transactions";
