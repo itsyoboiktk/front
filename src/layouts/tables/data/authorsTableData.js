@@ -27,6 +27,89 @@ import team3 from "assets/images/team-3.jpg";
 // import team4 from "assets/images/team-4.jpg";
 
 export default function data() {
+  // const tableData = [
+  //   {
+  //     orderName: "Zamit",
+  //     orderNo: 1,
+  //     price: 38,
+  //     city: "Armenia",
+  //     action: "interactive",
+  //     status: "Advanced",
+  //   },
+  //   {
+  //     orderName: "Sonsing",
+  //     orderNo: 2,
+  //     price: 62,
+  //     city: "Abaeté",
+  //     action: "zero defect",
+  //     status: "Synergized",
+  //   },
+  //   {
+  //     orderName: "Stim",
+  //     orderNo: 3,
+  //     price: 72,
+  //     city: "Bressuire",
+  //     action: "zero tolerance",
+  //     status: "Down-sized",
+  //   },
+  //   {
+  //     orderName: "Latlux",
+  //     orderNo: 4,
+  //     price: 55,
+  //     city: "Tegalsari",
+  //     action: "Persistent",
+  //     status: "exuding",
+  //   },
+  //   {
+  //     orderName: "Lotlux",
+  //     orderNo: 5,
+  //     price: 41,
+  //     city: "Puteran Kidul",
+  //     action: "tertiary",
+  //     status: "Phased",
+  //   },
+  //   {
+  //     orderName: "Alpha",
+  //     orderNo: 6,
+  //     price: 98,
+  //     city: "Mpanda",
+  //     action: "Polarised",
+  //     status: "Persistent",
+  //   },
+  //   {
+  //     orderName: "Redhold",
+  //     orderNo: 7,
+  //     price: 41,
+  //     city: "Tengah",
+  //     action: "matrix",
+  //     status: "projection",
+  //   },
+  //   {
+  //     orderName: "Aerified",
+  //     orderNo: 8,
+  //     price: 53,
+  //     city: "Jiangmen",
+  //     action: "hierarchy",
+  //     status: "knowledge base",
+  //   },
+  //   {
+  //     orderName: "Daltfresh",
+  //     orderNo: 9,
+  //     price: 40,
+  //     city: "Pringsewu",
+  //     action: "radical",
+  //     status: "Devolved",
+  //   },
+  //   {
+  //     orderName: "Fixflex",
+  //     orderNo: 10,
+  //     price: 63,
+  //     city: "Svirsk",
+  //     action: "alliance",
+  //     status: "Organic",
+  //   },
+  // ];
+
   const Order = ({ image, name, id }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1} borderColor="red" borderWidth={2}>
       <MDAvatar src={image} name={name} size="sm" />
@@ -47,7 +130,6 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" },
       { Header: "status", accessor: "status", align: "center" },
     ],
-
     rows: [
       {
         order: <Order image={team2} name="Nike Sneaker" id="123" />,

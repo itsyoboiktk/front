@@ -1,4 +1,4 @@
-Line 2:1:   Insert ··                                 prettier/prettier
+  Line 2:1:   Insert ··                                 prettier/prettier
   Line 3:1:   Replace ···· with ········              prettier/prettier
   Replace `········` with `················`        prettier/prettier
 
@@ -9,6 +9,7 @@ Failed to load config "airbnb" to extend from
 {
     "extends": [
       "airbnb",
+      "plugin:import/typescript",
       "airbnb/hooks",
       "eslint:recommended",
       "prettier",

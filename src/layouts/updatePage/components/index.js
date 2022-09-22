@@ -33,7 +33,7 @@ import homeDecor1 from "assets/images/home-decor-1.jpg";
 function UpdateProduct() {
   const { state } = useLocation();
   // eslint-disable-next-line prefer-destructuring
-  const products = state.products;
+  const products = state.product;
   // console.log(updates);
   const [title, setTitle] = React.useState("");
   const [brand, setBrand] = React.useState("");

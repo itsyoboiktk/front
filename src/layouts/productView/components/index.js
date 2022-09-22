@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -41,8 +42,9 @@ import MDBox from "components/MDBox";
 // import MDTypography from "components/MDTypography";
 // import DataTable from "examples/Tables/DataTable";
 import MDButton from "components/MDButton";
-import homeDecor1 from "assets/images/home-decor-1.jpg";
+import homeDecor2 from "assets/images/home-decor-1.jpg";
 import MDTypography from "components/MDTypography";
+import axios from "axios";
 
 // Images
 // import masterCardLogo from "assets/images/logos/mastercard.png";
@@ -61,6 +63,50 @@ function Product() {
   const { state } = useLocation();
   // eslint-disable-next-line prefer-destructuring
   const products = state.products;
+  console.log(products._id);
+  const id = products._id;
+  // const [message, setMessage] = React.useState("");
+
+  // const deleteProduct = (e) => {
+  //   e.preventDefault();
+  //   console.log("Coding");
+
+  //   const sendPostRequest = async () => {
+  //     console.log("in post");
+  //     try {
+  //       const res = await axios.delete(`http://localhost:4000/product/delete/${id}`);
+  //       // console.log(res.data);
+  //       // setmsg(res.data.msg)
+  //       alert(res.data.msg);
+  //       if (res.data.msg === "Product deleted") {
+  //         // console.log('in if')
+  //         // console.log(res.data.assign)
+  //         navigate("/inventory");
+  //       }
+  //     } catch (err) {
+  //       // Handle Error Here
+  //       console.error(err);
+  //     }
+  //   };
+  //   sendPostRequest();
+  // };
+  const deleteProduct = () => {
+    axios
+      .delete(`http://localhost:4000/product/delete/${id}`)
+      .then((res) => {
+        console.log("here is data", res);
+        //  setMessage(res.data.message);
+        console.log(res.data.message);
+        // setOpen(false);
+        if (res.data.message === "Product deleted") {
+          console.log("in if");
+          navigate("/inventory");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const style = {
     position: "absolute",
@@ -86,7 +132,7 @@ function Product() {
             <ArrowBackIosNewIcon />
           </Button>
           <img
-            src={homeDecor1}
+            src={homeDecor2}
             alt="product"
             style={{
               objectFit: "contain",
@@ -136,7 +182,11 @@ function Product() {
           </MDButton>
           <MDButton
             sx={styleButton}
-            onClick={() => navigate("/updatePage")}
+            onClick={() =>
+              navigate("/updatePage", {
+                state: { product: products },
+              })
+            }
             variant="gradient"
             color="info"
             startIcon={<UpgradeIcon />}
@@ -158,10 +208,10 @@ function Product() {
           <Typography variant="h6" component="h2">
             Are you sure you want to delete this item?
           </Typography>
-          <MDButton sx={styleButton} color="info">
+          <MDButton sx={styleButton} color="info" onClick={() => deleteProduct()}>
             Yes
           </MDButton>
-          <MDButton sx={styleButton} color="info">
+          <MDButton sx={styleButton} color="info" onClick={() => handleClose()}>
             No
           </MDButton>
         </MDBox>

@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-unresolved */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -52,6 +54,35 @@ function InventoryStuff() {
   // Cdata.map(setProduct);
   const [open, setOpen] = React.useState(false);
   const [products, setProducts] = React.useState([]);
+  const [id, setId] = React.useState("");
+  const handleOpen = (_id) => {
+    setId(_id);
+    console.log(_id);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+  const deleteProduct = () => {
+    axios
+      .delete(`http://localhost:4000/product/delete/${id}`)
+      .then(() => {
+        setOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const styleModal = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    borderRadius: "10px",
+    boxShadow: 25,
+    p: 4,
+  };
 
   React.useEffect(() => {
     axios
@@ -64,21 +95,6 @@ function InventoryStuff() {
         console.log(error);
       });
   }, [open]);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    borderRadius: "10px",
-    boxShadow: 25,
-    p: 4,
-  };
 
   return (
     <div className="grid-container">
@@ -119,19 +135,9 @@ function InventoryStuff() {
                 View
               </MDButton>
               <MDButton
-                color="info"
-                onClick={() =>
-                  navigate("/updatePage", {
-                    state: { products: ele },
-                  })
-                }
-              >
-                Edit
-              </MDButton>
-              <MDButton
                 variant="gradient"
                 color="info"
-                onClick={() => handleOpen()}
+                onClick={() => handleOpen(ele._id)}
                 startIcon={<DeleteIcon />}
               >
                 Delete
@@ -144,12 +150,16 @@ function InventoryStuff() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <MDBox bgColor="light" sx={style}>
+            <MDBox bgColor="light" sx={styleModal}>
               <Typography variant="h6" component="h2">
                 Are you sure you want to delete this item?
               </Typography>
-              <MDButton color="info">Yes</MDButton>
-              <MDButton color="info">No</MDButton>
+              <MDButton color="info" onClick={() => deleteProduct()}>
+                Yes
+              </MDButton>
+              <MDButton color="info" onClick={() => handleClose()}>
+                No
+              </MDButton>
             </MDBox>
           </Modal>
         </MDBox>
