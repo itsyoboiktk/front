@@ -36,16 +36,12 @@ function UpdateProductPage() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
-      <MDBox mt={8}>
-        <MDBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={8} lg={6}>
-              <Grid item xs={12}>
-                <UpdateProduct />
-              </Grid>
-            </Grid>
+      <MDBox mt={8} mb={3}>
+        <Grid container spacing={5} sx={{ justifyContent: "center" }}>
+          <Grid item spacing={5} xl={8}>
+            <UpdateProduct />
           </Grid>
-        </MDBox>
+        </Grid>
       </MDBox>
       <Footer />
     </DashboardLayout>

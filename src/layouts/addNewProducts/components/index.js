@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -25,30 +26,29 @@ import Modal from "@mui/material/Modal";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-// import Modal from "@mui/material/Modal";
-// import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
+import { useNavigate } from "react-router-dom";
+
 // import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+// import MDButton from "components/MDButton";
+import axios from "axios";
+//  { BackdropRoot } from "@mui/material";
 
 function NewProductCard() {
   // const [controller] = useMaterialUIController();
   // const { darkMode } = controller;
-  const [cat, setCat] = React.useState("");
-  const [gender, setGender] = React.useState("");
+  // const [cat, setCat] = React.useState("");
+  // const [gender, setGender] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const [title, setTitle] = React.useState("");
-  const [quantity, setQuantity] = React.useState("");
-  const [brand, setBrand] = React.useState("");
-  const [price, setPrice] = React.useState("");
+  const navigate = useNavigate();
+  // const [title, setTitle] = React.useState("");
+  // const [quantity, setQuantity] = React.useState("");
+  // const [brand, setBrand] = React.useState("");
+  // const [price, setPrice] = React.useState("");
 
-  // const handleOpen = () => {
-  // setOpen(true);
-  // };
   // eslint-disable-next-line no-unused-vars
   const handleOpen = () => {
     setOpen(true);
@@ -58,10 +58,17 @@ function NewProductCard() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("here");
     const data = new FormData(event.currentTarget);
-    console.log(data);
-    const Dataarray = [title, cat, quantity, gender, brand, price];
-    console.log(Dataarray);
+
+    sendData(data);
+  };
+  const sendData = async (data) => {
+    const res = await axios.post("http://localhost:4000/product/upload", data);
+    alert(res.data.message);
+    if (res.data.message === "product added") {
+      navigate("/inventory");
+    }
   };
 
   const style = {
@@ -90,15 +97,23 @@ function NewProductCard() {
         <MDTypography variant="h6" fontWeight="medium">
           New Product Card
         </MDTypography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
+        <Box
+          // backgroundColor="primary.main"
+          alignContent="center"
+          textAlign="center"
+          component="form"
+          noValidate
+          onSubmit={handleSubmit}
+          sx={{ mt: 3 }}
+        >
+          <Grid container spacing={2} alignItems="center" justifyItems="center">
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="given-name"
                 name="title"
                 required
-                onChange={(x) => setTitle(x.target.value)}
-                value={title}
+                // onChange={(x) => setTitle(x.target.value)}
+                // value={title}
                 fullWidth
                 id="productname"
                 label="Product Title"
@@ -106,23 +121,23 @@ function NewProductCard() {
               />
             </Grid>
             <Grid item xs={20} sm={6}>
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                  <Select
-                    labelId="cat"
-                    id="cat"
-                    onChange={(x) => setCat(x.target.value)}
-                    value={cat}
-                    label="Category"
-                    name="Category"
-                  >
-                    <MenuItem value="Sneaker">Sneaker</MenuItem>
-                    <MenuItem value="Causal">Causal</MenuItem>
-                    <MenuItem value="Formal">Formal</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
+              <FormControl fullWidth size="small" variant="outlined">
+                <InputLabel id="demo-simple-select-label" size="normal">
+                  Category
+                </InputLabel>
+                <Select
+                  labelId="cat"
+                  id="cat"
+                  // onChange={(x) => setCat(x.target.value)}
+                  // value={cat}
+                  label="Category"
+                  name="category"
+                >
+                  <MenuItem value="Sneaker">Sneaker</MenuItem>
+                  <MenuItem value="Causal">Causal</MenuItem>
+                  <MenuItem value="Formal">Formal</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -130,8 +145,8 @@ function NewProductCard() {
                 name="quantity"
                 required
                 fullWidth
-                onChange={(x) => setQuantity(x.target.value)}
-                value={quantity}
+                // onChange={(x) => setQuantity(x.target.value)}
+                // value={quantity}
                 id="quantity"
                 label="Quantity"
                 autoFocus
@@ -144,10 +159,10 @@ function NewProductCard() {
                   <Select
                     labelId="for"
                     id="for"
-                    onChange={(x) => setGender(x.target.value)}
-                    value={gender}
+                    // onChange={(x) => setGender(x.target.value)}
+                    // value={gender}
                     label="For"
-                    name="Gender"
+                    name="gender"
                   >
                     <MenuItem value="Men">Men</MenuItem>
                     <MenuItem value="Women">Women</MenuItem>
@@ -159,8 +174,8 @@ function NewProductCard() {
             <Grid item xs={12} sm={6}>
               <TextField
                 name="brand"
-                onChange={(x) => setBrand(x.target.value)}
-                value={brand}
+                // onChange={(x) => setBrand(x.target.value)}
+                // value={brand}
                 required
                 fullWidth
                 id="brand"
@@ -171,8 +186,8 @@ function NewProductCard() {
             <Grid item xs={12} sm={6}>
               <TextField
                 name="price"
-                onChange={(x) => setPrice(x.target.value)}
-                value={price}
+                // onChange={(x) => setPrice(x.target.value)}
+                // value={price}
                 required
                 fullWidth
                 id="price"
@@ -181,22 +196,56 @@ function NewProductCard() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <MDButton variant="contained" component="label" color="info">
-                Upload file
-                <Input type="file" name="image" hidden multiple accept="image/png , image/jpeg" />
-              </MDButton>
+              <TextField
+                name="size"
+                required
+                fullWidth
+                id="size"
+                label="Size"
+                placeholder="41,42,43"
+                autoFocus
+              />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="description"
+                multiline
+                minRows={3}
+                required
+                fullWidth
+                id="description"
+                label="Product Description"
+                placeholder="Product Description"
+                autoFocus
+              />
+            </Grid>
+            <div style={{ justifyContent: "center" }}>
+              <Button variant="contained" component="label">
+                Upload File
+                <input
+                  type="file"
+                  name="images"
+                  style={{ display: "none" }}
+                  hidden
+                  multiple
+                  accept="image/png , image/jpeg"
+                />
+              </Button>
+            </div>
           </Grid>
-          <Button
-            type="Proceed"
-            startIcon={<AddIcon />}
-            onClick={() => handleOpen()}
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Add Product
-          </Button>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              type="Proceed"
+              startIcon={<AddIcon />}
+              onClick={() => handleOpen()}
+              variant="contained"
+              fontSize="normal"
+              bgcolor="info"
+              sx={{ marginleft: 27, marginBottom: 5, marginTop: 2 }}
+            >
+              Add Product
+            </Button>
+          </div>
         </Box>
       </MDBox>
       <Modal

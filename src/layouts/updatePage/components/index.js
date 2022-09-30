@@ -1,3 +1,6 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-underscore-dangle */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -16,7 +19,9 @@ Coded by www.creative-tim.com
 // @mui material components
 import React from "react";
 import MDBox from "components/MDBox";
-import { useLocation } from "react-router-dom";
+import MDButton from "components/MDButton";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import { useLocation, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -27,6 +32,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 // import Modal from "@mui/material/Modal";
 import homeDecor1 from "assets/images/home-decor-1.jpg";
 
@@ -34,21 +40,46 @@ function UpdateProduct() {
   const { state } = useLocation();
   // eslint-disable-next-line prefer-destructuring
   const products = state.product;
+  const id = products._id;
   // console.log(updates);
-  const [title, setTitle] = React.useState("");
-  const [brand, setBrand] = React.useState("");
-  const [quantity, setQuantity] = React.useState("");
-  const [cat, setCat] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [price, setPrice] = React.useState("");
+  const navigate = useNavigate();
+  const [title1, setTitle] = React.useState(products.title);
+  const [brand1, setBrand] = React.useState(products.brand);
+  const [quantity1, setQuantity] = React.useState(products.quantity);
+  const [category1, setCategory] = React.useState(products.category);
+  const [gender1, setGender] = React.useState(products.gender);
+  const [price1, setPrice] = React.useState(products.price);
+  const [description1, setDescription] = React.useState(products.description);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log(data);
-    const Dataarray = [title, brand, quantity, cat, gender, price];
-    console.log(Dataarray);
+    const updated = {
+      _id: products._id,
+      title: title1,
+      category: category1,
+      gender: gender1,
+      price: price1,
+      brand: brand1,
+      quantity: quantity1,
+      description: description1,
+    };
+    console.log(updated);
+    sendData(updated);
   };
+  const sendData = (data) => {
+    axios
+      .put(`http://localhost:4000/product/update/${id}`, data)
+      .then((res) => {
+        console.log(res);
+        navigate("/inventory");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   // const style = {
   //   position: "absolute",
   //   top: "50%",
@@ -67,144 +98,150 @@ function UpdateProduct() {
   // };
 
   return (
-    <MDBox>
-      <MDBox>
-        <MDBox display="flex">
-          <Button>
-            <ArrowBackIosNewIcon />
-          </Button>
-          <img
-            src={homeDecor1}
-            alt="product"
-            style={{
-              objectFit: "contain",
-              maxWidth: "400px",
-              maxHeight: "400px",
-              minHeight: "400px",
-              minWidth: "400px",
-            }}
-          />
-          <Button>
-            <ArrowForwardIosIcon />
-          </Button>
-        </MDBox>
+    <div
+      style={{
+        backgroundColor: "white",
+        // border: "1px solid",
+        borderRadius: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        // maxHeight: "100vh",
+      }}
+    >
+      <Box display="flex">
+        <Button>
+          <ArrowBackIosNewIcon />
+        </Button>
+        <img
+          src={homeDecor1}
+          alt="product"
+          style={{
+            objectFit: "contain",
+            maxWidth: "400px",
+            maxHeight: "400px",
+            minHeight: "400px",
+            minWidth: "400px",
+          }}
+        />
+        <Button>
+          <ArrowForwardIosIcon />
+        </Button>
+      </Box>
 
-        <MDBox>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={24} sm={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="title"
-                  required
-                  onChange={(x) => setTitle(x.target.value)}
-                  value={title}
-                  fullWidth
-                  placeholder={products.name}
-                  id="productname"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  name="brand"
-                  onChange={(x) => setBrand(x.target.value)}
-                  value={brand}
-                  placeholder={products.brand}
-                  required
-                  fullWidth
-                  id="brand"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  name="quantity"
-                  onChange={(x) => setQuantity(x.target.value)}
-                  value={quantity}
-                  placeholder={products.quantity}
-                  required
-                  fullWidth
-                  id="quantity"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={20} sm={12}>
-                <Box sx={{ minWidth: 120 }}>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">{products.category}</InputLabel>
-                    <Select
-                      labelId="cat"
-                      id="cat"
-                      onChange={(x) => setCat(x.target.value)}
-                      value={cat}
-                      label="Category"
-                      name="Category"
-                    >
-                      <MenuItem value="Sneaker">Sneaker</MenuItem>
-                      <MenuItem value="Causal">Causal</MenuItem>
-                      <MenuItem value="Formal">Formal</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-              </Grid>
-              <Grid item xs={20} sm={12}>
-                <Box>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">{products.gender}</InputLabel>
-                    <Select
-                      labelId="for"
-                      id="for"
-                      onChange={(x) => setGender(x.target.value)}
-                      value={gender}
-                      label="For"
-                      name="Gender"
-                    >
-                      <MenuItem value="Men">Men</MenuItem>
-                      <MenuItem value="Women">Women</MenuItem>
-                      <MenuItem value="Unisex">Unisex</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  name="price"
-                  onChange={(x) => setPrice(x.target.value)}
-                  value={price}
-                  placeholder={products.price}
-                  required
-                  fullWidth
-                  id="price"
-                  autoFocus
-                />
-              </Grid>
+      <MDBox>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, p: 4 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={24} sm={12}>
+              <TextField
+                autoComplete="given-name"
+                label="Product Title"
+                name="title"
+                required
+                value={title1}
+                onChange={(x) => setTitle(x.target.value)}
+                fullWidth
+                id="productname"
+                autoFocus
+              />
             </Grid>
-            <Button type="Proceed" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                name="brand"
+                label="Brand"
+                value={brand1}
+                onChange={(x) => setBrand(x.target.value)}
+                required
+                fullWidth
+                id="brand"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                name="quantity"
+                label="Quantity"
+                onChange={(x) => setQuantity(x.target.value)}
+                value={quantity1}
+                required
+                fullWidth
+                id="quantity"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={20} sm={12}>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                  <Select
+                    labelId="cat"
+                    id="cat"
+                    label="Category"
+                    onChange={(x) => setCategory(x.target.value)}
+                    value={category1}
+                    name="Category"
+                  >
+                    <MenuItem value="Sneaker">Sneaker</MenuItem>
+                    <MenuItem value="Causal">Causal</MenuItem>
+                    <MenuItem value="Formal">Formal</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Grid>
+            <Grid item xs={20} sm={12}>
+              <Box>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">for</InputLabel>
+                  <Select
+                    labelId="for"
+                    id="for"
+                    onChange={(x) => setGender(x.target.value)}
+                    value={gender1}
+                    label="For"
+                    name="Gender"
+                  >
+                    <MenuItem value="Men">Men</MenuItem>
+                    <MenuItem value="Women">Women</MenuItem>
+                    <MenuItem value="Unisex">Unisex</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                name="price"
+                onChange={(x) => setPrice(x.target.value)}
+                value={price1}
+                required
+                fullWidth
+                label="Price"
+                id="price"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                name="description"
+                multiline
+                minRows={3}
+                required
+                fullWidth
+                id="description"
+                label="Product Description"
+                onChange={(x) => setDescription(x.target.value)}
+                value={description1}
+                autoFocus
+              />
+            </Grid>
+          </Grid>
+          <div style={{ textAlign: "center", marginTop: 10 }}>
+            <Button type="Proceed" variant="gradient" color="info" startIcon={<UpgradeIcon />}>
               Update
             </Button>
-          </Box>
-        </MDBox>
+          </div>
+        </Box>
       </MDBox>
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <MDBox bgColor="light" coloredShadow="dark" sx={style}>
-          <Typography variant="h6" component="h2">
-            Are you sure you want to delete this item?
-          </Typography>
-          <MDButton sx={styleButton} color="info">
-            Yes
-          </MDButton>
-          <MDButton sx={styleButton} color="info">
-            No
-          </MDButton>
-        </MDBox>
-      </Modal> */}
-    </MDBox>
+    </div>
   );
 }
 

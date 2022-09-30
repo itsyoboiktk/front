@@ -24,8 +24,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from "@mui/material/Modal";
-// import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 // import Grid from "@mui/material/Grid";
@@ -33,7 +34,7 @@ import { useNavigate } from "react-router-dom";
 // import Tooltip from "@mui/material/Tooltip";
 import "./inventory.css";
 // Material Dashboard 2 React components
-import homeDecor2 from "assets/images/home-decor-2.jpg";
+// import homeDecor2 from "assets/images/home-decor-2.jpg";
 import MDButton from "components/MDButton";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -62,6 +63,7 @@ function InventoryStuff() {
   };
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const sID = "633023a31822a313b1cc2097";
 
   const deleteProduct = () => {
     axios
@@ -86,7 +88,7 @@ function InventoryStuff() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:4000/product/display")
+      .get(`http://localhost:4000/product/inventory/display/${sID}`)
       .then((res) => {
         setProducts(res.data);
         console.log(res.data);
@@ -111,7 +113,13 @@ function InventoryStuff() {
           bgColor="error"
         >
           <Card sx={{ maxWidth: 345, margin: "10px", flex: "1 1 20%" }}>
-            <CardMedia component="img" height="140" image={homeDecor2} alt="product image" />
+            <CardMedia
+              component="img"
+              height="140"
+              // image={`http://localhost:4000/${ele.path[1]}`}
+              image={`http://localhost:4000/${ele.path[0]}`}
+              alt="product image"
+            />
             <CardContent>
               <MDTypography gutterBottom variant="h5" component="div">
                 {ele.title}
@@ -147,19 +155,31 @@ function InventoryStuff() {
           <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            aria-labelledby="alert-dialog-modal-title"
+            aria-describedby="alert-dialog-modal-description"
           >
-            <MDBox bgColor="light" sx={styleModal}>
-              <Typography variant="h6" component="h2">
-                Are you sure you want to delete this item?
+            <MDBox bgColor="light" coloredShadow="dark" sx={styleModal}>
+              <Typography
+                id="alert-dialog-modal-title"
+                component="h2"
+                level="inherit"
+                fontSize="1.25em"
+                mb="0.25em"
+                startDecorator={<WarningRoundedIcon />}
+              >
+                Confirmation
               </Typography>
-              <MDButton color="info" onClick={() => deleteProduct()}>
-                Yes
-              </MDButton>
-              <MDButton color="info" onClick={() => handleClose()}>
-                No
-              </MDButton>
+              <Typography id="alert-dialog-modal-description" textColor="text.tertiary" mb={3}>
+                Are you sure you want to delete this?
+              </Typography>
+              <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
+                <Button variant="plain" color="neutral" onClick={() => handleClose()}>
+                  Cancel
+                </Button>
+                <Button variant="solid" color="danger" onClick={() => deleteProduct()}>
+                  Delete
+                </Button>
+              </Box>
             </MDBox>
           </Modal>
         </MDBox>

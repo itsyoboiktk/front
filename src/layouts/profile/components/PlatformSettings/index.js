@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -24,12 +25,12 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
 function PlatformSettings() {
-  const [followsMe, setFollowsMe] = useState(true);
-  const [answersPost, setAnswersPost] = useState(false);
-  const [mentionsMe, setMentionsMe] = useState(true);
-  const [newLaunches, setNewLaunches] = useState(false);
-  const [productUpdate, setProductUpdate] = useState(true);
-  const [newsletter, setNewsletter] = useState(false);
+  // const [followsMe, setFollowsMe] = useState(true);
+  // const [answersPost, setAnswersPost] = useState(false);
+  // const [mentionsMe, setMentionsMe] = useState(true);
+  // const [newLaunches, setNewLaunches] = useState(false);
+  // const [productUpdate, setProductUpdate] = useState(true);
+  // const [newsletter, setNewsletter] = useState(false);
 
   return (
     <Card sx={{ boxShadow: "none" }}>
@@ -38,7 +39,7 @@ function PlatformSettings() {
           platform settings
         </MDTypography>
       </MDBox>
-      <MDBox pt={1} pb={2} px={2} lineHeight={1.25}>
+      {/* <MDBox pt={1} pb={2} px={2} lineHeight={1.25}>
         <MDTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
           account
         </MDTypography>
@@ -107,7 +108,7 @@ function PlatformSettings() {
             </MDTypography>
           </MDBox>
         </MDBox>
-      </MDBox>
+      </MDBox> */}
     </Card>
   );
 }

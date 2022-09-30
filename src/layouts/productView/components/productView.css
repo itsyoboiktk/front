@@ -1,0 +1,53 @@
+.Modal_Rev {
+    position: absolute;
+    top: 50%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+    width: 800;
+    height: 600;
+    border-radius: 10px; 
+    box-shadow: 25;
+    padding: 4;
+    background-color: white; 
+    overflow-y: auto;
+}
+.textD {
+  /*  background-color: white;  */
+  align-self: flex-start;
+  margin-left: 10%;
+};
+.product_container{
+  display: flex;
+
+  height: 100%;
+  padding: 0;
+}
+.product_card{
+  height: 100%;
+  width: auto;
+  margin: 2px;
+  display: flex;
+ margin: 5px;
+ border-radius: 10px;
+  }
+.product_card .slider{
+  display: flex;
+  width: 80%;
+  height: 20%;
+  
+}
+.desc{
+  width: 100%;
+  margin: 5px;
+  padding: 25px;
+  border: 1px solid;
+
+}
+.desc >p{
+  margin: 1px;
+  
+}
+.desc >h4{
+  margin-top: 10px;
+  
+}

@@ -14,26 +14,31 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
+import Box from "@mui/material/Box";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
+import axios from "axios";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+// import MDInput from "components/MDInput";
+// import MDButton from "components/MDButton";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
@@ -43,23 +48,59 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
-
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("i");
+    const data = new FormData(event.currentTarget);
+    const check = {
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    axios
+      .post("http://localhost:4000/manager/login", check)
+      .then((res) => {
+        console.log(res.data);
+        // localStorage.setItem("token", "Bearer " + result.data.token);
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        // setOpen(true);
+        console.log(err);
+      });
+  };
 
   return (
     <BasicLayout image={bgImage}>
-      <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
+      <Card sx={{ mt: 5 }}>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            bgcolor: "primary.main",
+            mx: 2,
+            mt: 2,
+            p: 2,
+            mb: 1,
+          }}
+          // variant="gradient"
+          // bgColor="info"
+          // borderRadius="lg"
+          // coloredShadow="info"
+          // display="flex"
+          // flexDirectiom="column"
+          // mx={2}
+          // mt={-3}
+          // p={2}
+          // mb={1}
+          // textAlign="center"
+          // alignItems="center"
         >
+          <Avatar alt="SneakerLogo" src="../sneaklogo.png" sx={{ width: 80, height: 80 }} />{" "}
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
@@ -80,14 +121,19 @@ function Basic() {
               </MDTypography>
             </Grid>
           </Grid>
-        </MDBox>
+        </Box>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <Box component="form" onSubmit={handleSubmit} noValidate>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <TextField margin="normal" required fullWidth label="Email Address" name="email" />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+              />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -102,11 +148,17 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
-              </MDButton>
+              <Button
+                // onClick={() =>}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
+            <MDBox mt={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Don&apos;t have an account?{" "}
                 <MDTypography
@@ -121,7 +173,22 @@ function Basic() {
                 </MDTypography>
               </MDTypography>
             </MDBox>
-          </MDBox>
+            <MDBox mt={1} textAlign="center">
+              <MDTypography variant="button" color="text">
+                Forgot Password?{" "}
+                <MDTypography
+                  component={Link}
+                  to="/authentication/reset-password/cover"
+                  variant="button"
+                  color="info"
+                  fontWeight="medium"
+                  textGradient
+                >
+                  Click Here
+                </MDTypography>
+              </MDTypography>
+            </MDBox>
+          </Box>
         </MDBox>
       </Card>
     </BasicLayout>

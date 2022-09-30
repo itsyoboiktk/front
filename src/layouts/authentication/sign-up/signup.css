@@ -1,0 +1,9 @@
+.try { 
+    background-color: "pink";
+    font-size: 28;
+}
+
+.Box {
+    variant:"gradient";
+    background-color:"blue";
+          }

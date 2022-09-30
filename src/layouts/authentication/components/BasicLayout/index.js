@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-unresolved */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -43,7 +45,7 @@ function BasicLayout({ image, children }) {
       <MDBox
         position="absolute"
         width="100%"
-        minHeight="100vh"
+        minHeight="105vh"
         sx={{
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             image &&
@@ -56,14 +58,16 @@ function BasicLayout({ image, children }) {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <MDBox px={1} width="100%" height="100vh" mx="auto">
-        <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+      <MDBox px={1} width="100%" height="105vh" mx="auto">
+        <Grid container spacing={0.5} justifyContent="center" alignItems="center" height="100%">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             {children}
           </Grid>
         </Grid>
       </MDBox>
-      <Footer light />
+      {/* <Grid>
+        <Footer />
+      </Grid> */}
     </PageLayout>
   );
 }

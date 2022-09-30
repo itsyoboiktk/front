@@ -39,10 +39,8 @@ function ProductView() {
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={8} lg={6}>
-              <Grid item xs={12}>
-                <Product />
-              </Grid>
+            <Grid item xs={12}>
+              <Product />
             </Grid>
           </Grid>
         </MDBox>
